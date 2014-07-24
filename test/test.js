@@ -18,6 +18,10 @@ describe('Things', function(){
         // listen for individual blocks as soon as they're
         // available
         .on('block', function( filename, block ){
+          if ( block.snippet ) {
+            block.snippet.should.have.property( 'foo' );
+            block.snippet.foo.should.equal( 'bar' );
+          }
           blocks.push( block );
         })
         // receive all blocks once everything has finished

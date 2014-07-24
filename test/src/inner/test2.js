@@ -1,14 +1,11 @@
 /**
- * @socket anotherSocketEvent
- * @on someData
+ * @emitter anotherEmitter
  * @description get's called when client sends some data
  */
-socket.on('data', function(){
-
-});
+socket.emit('foo');
 
 /**
- * @socket adminSocket
+ * @listener adminSocket
  * @on joinAdmin
  * @description The client has joined the admin role
  */
