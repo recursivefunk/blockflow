@@ -19,11 +19,10 @@ var _srcRoot =  null;
 var blockEmitter = new EventEmitter();
 
 function run() {
-  var fileDescripts = {};
+  var blocks = [];
   var toProcess = [];
 
   function transform( filename, onTransform ){
-    fileDescripts[ filename ] = [];
 
     fs.createReadStream( filename )
 
@@ -42,8 +41,9 @@ function run() {
           var obj = parser.parseBlock( data );
 
           if ( !parser.emptyBlock( obj ) ) {
-            fileDescripts[ filename ].push( obj );
-            blockEmitter.emit( 'block', filename, obj );
+            obj.filename = filename;
+            blocks.push( obj );
+            blockEmitter.emit( 'block', obj );
           }
 
           return callback();
@@ -62,7 +62,7 @@ function run() {
 
     .on('end', function(){
       async.each( toProcess, transform, function(){
-        blockEmitter.emit( 'end', _srcRoot, fileDescripts );
+        blockEmitter.emit( 'end', _srcRoot, blocks );
       });
     });
 

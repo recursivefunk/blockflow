@@ -1,0 +1,29 @@
+doctype html
+html(lang="en")
+  head
+    link(rel="stylesheet", href="css/app.css")
+  body
+    header.header
+      .container
+          each entry in items
+            .api-entry
+              h1.api-entry__title Foo
+                a.api-entry__file(href="#")=entry.filename
+              p.api-entry__socket-type
+              if entry.on
+                span.api-entry__keyword Listens
+                |  for someEvent
+              else if entry.emitter
+                span.api-entry__keyword Emits
+                |  someEvent
+              if entry.callbackArgs
+                p.api-entry__args-list
+                  span.api-entry__keyword Callback Args:
+                  each arg in entry.callbackArgs
+                    span.api-entry__callback-arg=arg
+              if entry.description
+                p.api-entry__description
+                  span.api-entry__keyword--block Description
+                  =entry.description
+              if entry.snippet
+                code=JSON.stringify( entry.snippet )

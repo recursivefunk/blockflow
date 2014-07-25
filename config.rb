@@ -1,5 +1,5 @@
 
 
-css_dir = 'template/css'
+css_dir = 'out/css'
 sass_dir = 'template/sass'
 relative_assets = true
