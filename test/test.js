@@ -2,18 +2,26 @@
 
 'use strict';
 
+var path = require( 'path' );
+
 var should = require( 'should' );
-var blockEmitter = require( '../index' );
-var fs = require( 'fs' );
-var merge = require( 'merge' );
+var fs = require( 'fs-extra' );
 var jade = require( 'jade' );
+var sass = require( 'node-sass' );
+
+var blockEmitter = require( '../index' );
 
 describe('Things', function(){
 
-  var jadeOpts = {};
-  var jadeLocals = {
+  var jadeOpts = {
     pretty: true
   };
+  var outDir = './out';
+  var tmplDir = './template';
+  var htmlOut = path.join( outDir, 'index.html' );
+  var cssOut = path.join( outDir, 'css', 'app.css' );
+  var jadeTmpl = path.join( tmplDir, 'index.jade' );
+  var sassTmpl = path.join( tmplDir, 'sass', 'app.scss' );
 
   it('works', function(done){
     var blocks = [];
@@ -35,16 +43,25 @@ describe('Things', function(){
         // receive all blocks once everything has finished
         // processing
         .on('end', function(srcRoot, apiEntries){
-
-          jadeLocals.items = apiEntries;
-          var html = jade.renderFile('./template/index.jade', merge( jadeOpts, jadeLocals ) );
-          fs.createWriteStream( 'out/index.html' ).write( html );
+          jadeOpts.items = apiEntries;
+          var html = jade.renderFile( jadeTmpl, jadeOpts );
+          var css = sass.renderSync({
+            file: sassTmpl
+          });
 
           srcRoot.should.equal( root );
+
+          fs.mkdirsSync( path.join( outDir, 'css' ) );
+          fs.createWriteStream( htmlOut ).write( html );
+          fs.createWriteStream( cssOut ).write( css );
+
+          (function(){
+            fs.statSync( htmlOut );
+            fs.statSync( cssOut );
+            fs.removeSync( outDir );
+          }).should.not.throw();
+
           done();
         });
   });
-
-
-
 });

@@ -52,7 +52,6 @@ function run() {
         .on( 'end', onTransform );
   }
 
-
   find( _srcRoot )
 
     .on('file', function(file){
