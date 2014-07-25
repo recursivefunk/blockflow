@@ -11,7 +11,7 @@ var sass = require( 'node-sass' );
 
 var blockEmitter = require( '../index' );
 
-describe('Things', function(){
+describe('Rundown', function(){
 
   var jadeOpts = {
     pretty: true
@@ -34,10 +34,6 @@ describe('Things', function(){
         // listen for individual blocks as soon as they're
         // available
         .on('block', function( block ){
-          if ( block.snippet ) {
-            block.snippet.should.have.property( 'foo' );
-            block.snippet.foo.should.equal( 'bar' );
-          }
           blocks.push( block );
         })
         // receive all blocks once everything has finished
@@ -55,11 +51,13 @@ describe('Things', function(){
           fs.createWriteStream( htmlOut ).write( html );
           fs.createWriteStream( cssOut ).write( css );
 
-          (function(){
+          var clean = function() {
             fs.statSync( htmlOut );
             fs.statSync( cssOut );
-            fs.removeSync( outDir );
-          }).should.not.throw();
+            // fs.removeSync( outDir );
+          };
+
+          ( clean ).should.not.throw();
 
           done();
         });

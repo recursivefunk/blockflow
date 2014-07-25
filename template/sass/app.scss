@@ -29,6 +29,7 @@ code {
   font-family: 'Courier New','Andale Mono',monospace;
   display: block;
   padding: 10px;
+  display:block;
 }
 
 .header {
@@ -60,7 +61,8 @@ code {
   padding: 2px;
 }
 
-.api-entry__callback-arg {
+.api-entry__callback-arg,
+.api-entry__on-evt-name {
   padding-left: 5px;
   padding-right: 5px;
 }

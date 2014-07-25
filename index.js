@@ -11,18 +11,23 @@ var es = require( 'event-stream' );
 var find = require( 'findit' );
 var _ = require( 'highland' );
 var async = require( 'async' );
+var log = require( 'luvely' );
 
 // my stuff
 var parser = require( './lib/parser' )();
 var blockRegex = new RegExp( /\/\*([\s\S]*?)\*\//g );
 var _srcRoot =  null;
+var _srcOpts = {};
 var blockEmitter = new EventEmitter();
 
 function run() {
+
   var blocks = [];
   var toProcess = [];
 
-  function transform( filename, onTransform ){
+  function transform( filename, onTransform ) {
+
+    log.debug( 'Parsing ', filename );
 
     fs.createReadStream( filename )
 
@@ -65,13 +70,15 @@ function run() {
       });
     });
 
+  log.debug( 'Parsing src tree starting at ', _srcRoot );
   return blockEmitter;
 }
 
 exports.run = run;
 
-exports.from = function( srcRoot ) {
+exports.from = function( srcRoot, srcOpts ) {
   _srcRoot = srcRoot;
+  _srcOpts = srcOpts || _srcOpts;
   return exports;
 };
 

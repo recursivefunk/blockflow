@@ -7,12 +7,18 @@ html(lang="en")
       .container
           each entry in items
             .api-entry
-              h1.api-entry__title Foo
+              h1.api-entry__title
+                if entry.emitter
+                  span=entry.emitter
+                else if entry.listener
+                  span=entry.listener
                 a.api-entry__file(href="#")=entry.filename
               p.api-entry__socket-type
               if entry.on
                 span.api-entry__keyword Listens
-                |  for someEvent
+                |  for
+                span.api-entry__on-evt-name=entry.on
+                |  event
               else if entry.emitter
                 span.api-entry__keyword Emits
                 |  someEvent
@@ -26,4 +32,6 @@ html(lang="en")
                   span.api-entry__keyword--block Description
                   =entry.description
               if entry.snippet
-                code=JSON.stringify( entry.snippet )
+                pre
+                  code
+                    =entry.snippet

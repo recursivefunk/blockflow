@@ -5,7 +5,7 @@
 socket.emit('foo');
 
 /**
- * @listener adminSocket
+ * @listener adminSocketListener
  * @on joinAdmin
  * @description The client has joined the admin role
  */

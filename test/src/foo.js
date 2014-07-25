@@ -1,6 +1,6 @@
 
 /**
- * @listener aSocketEvent
+ * @listener aSocketEventListener
  * @on data
  * @description get's called when client sends data
  * @callbackArg foo
@@ -11,7 +11,7 @@ socket.on('data', function(){
 });
 
 /**
- * @emitter someSocket
+ * @emitter someSocketEmitter
  * @snippet
  * {
  *   "foo": "bar"
