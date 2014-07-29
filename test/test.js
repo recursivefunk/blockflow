@@ -39,6 +39,7 @@ describe('Block Flow', function(){
         // receive all blocks once everything has finished
         // processing
         .on('end', function(srcRoot, apiEntries){
+          blocks.length.should.equal( apiEntries.length );
           jadeOpts.items = apiEntries;
           var html = jade.renderFile( jadeTmpl, jadeOpts );
           var css = sass.renderSync({
