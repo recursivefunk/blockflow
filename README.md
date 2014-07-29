@@ -53,7 +53,7 @@ blockflow
 ```
 
 ## Module Usage
-```
+```javascript
 var blockflow = require( 'blockflow' );
 
 blockflow
