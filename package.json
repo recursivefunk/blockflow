@@ -6,8 +6,13 @@
   "scripts": {
     "test": "mocha test/test"
   },
+  "bin": "./cli.js",
   "author": "Johnny Austin <johnny@johnnyray.me>",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/jrayaustin/rundown"
+  },
   "dependencies": {
     "async": "^0.9.0",
     "event-stream": "^3.1.5",
@@ -16,6 +21,7 @@
     "highland": "^1.26.3",
     "jade": "^1.5.0",
     "luvely": "0.0.5",
+    "minimist": "^0.2.0",
     "mkdirp": "^0.5.0",
     "node-sass": "^0.9.3"
   },

@@ -20,14 +20,17 @@ var _srcRoot =  null;
 var _srcOpts = {};
 var blockEmitter = new EventEmitter();
 
-function run() {
+function run( srcOpts ) {
 
+  _srcOpts = srcOpts || _srcOpts;
   var blocks = [];
   var toProcess = [];
 
   function transform( filename, onTransform ) {
 
-    log.debug( 'Parsing ', filename );
+    if ( _srcOpts.verbose ) {
+      log.debug( 'Parsing ', filename );
+    }
 
     fs.createReadStream( filename )
 
@@ -43,7 +46,7 @@ function run() {
         }))
 
         .pipe(es.map(function( data, callback ){
-          var obj = parser.parseBlock( data );
+          var obj = parser.parseBlock( data, _srcOpts );
 
           if ( !parser.emptyBlock( obj ) ) {
             obj.filename = filename;
@@ -70,15 +73,16 @@ function run() {
       });
     });
 
-  log.debug( 'Parsing src tree starting at ', _srcRoot );
+  if ( _srcOpts.verbose ) {
+    log.debug( 'Parsing src tree starting at ', _srcRoot );
+  }
   return blockEmitter;
 }
 
 exports.run = run;
 
-exports.from = function( srcRoot, srcOpts ) {
+exports.from = function( srcRoot ) {
   _srcRoot = srcRoot;
-  _srcOpts = srcOpts || _srcOpts;
   return exports;
 };
 
