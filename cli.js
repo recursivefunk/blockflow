@@ -10,6 +10,7 @@ var sass = require( 'node-sass' );
 var docflow = require( './index' );
 var log = require( 'luvely' );
 var server = require( './lib/server' );
+var utils = require( './lib/utils' );
 
 if ( !args.h ) {
 
@@ -63,24 +64,9 @@ if ( !args.h ) {
 
       });
   } else {
-    printHelp();
+    utils.printHelp();
   }
 
 } else {
-  printHelp();
-}
-
-function printHelp() {
-
-  console.log('\n');
-  console.log( '    Block Flow Options' );
-  console.log('\n');
-  console.log( '    -s (source)   [required] The root of your source tree' );
-  console.log( '    -o (out)      [optional] Web output directory. Defaults to ./blockflow_docs' );
-  console.log( '    -a (api-mode) [optional] Expose raw block data at a restul endpoint' );
-  console.log( '    -e (endpoint) [optional] The endpoint at which to expose raw block data' );
-  console.log( '    -p (port)     [optional] Port for the api-mode server' );
-  console.log( '    -v (verbose)  [optional] Verbose logging. Defaults to false' );
-  console.log('\n');
-
+  utils.printHelp();
 }

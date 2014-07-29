@@ -9,8 +9,8 @@ var request = require( 'request' );
 var fs = require( 'fs-extra' );
 var jade = require( 'jade' );
 var sass = require( 'node-sass' );
-var server = require( '../lib/server' );
 
+var server = require( '../lib/server' );
 var docflow = require( '../index' );
 
 describe('Block Flow', function(){
@@ -30,6 +30,7 @@ describe('Block Flow', function(){
   it('flows blocks like a boss', function(done){
 
     var root = 'test/src';
+
     docflow
       // start at the configured source root
       .from( root )
