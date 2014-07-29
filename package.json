@@ -32,6 +32,7 @@
     "should": "^4.0.4"
   },
   "dependencies": {
+    "request": "^2.39.0",
     "restify": "^2.8.1",
     "resumer": "0.0.0"
   }

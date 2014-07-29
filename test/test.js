@@ -5,14 +5,18 @@
 var path = require( 'path' );
 
 var should = require( 'should' );
+var request = require( 'request' );
 var fs = require( 'fs-extra' );
 var jade = require( 'jade' );
 var sass = require( 'node-sass' );
+var server = require( '../lib/server' );
 
 var docflow = require( '../index' );
 
 describe('Block Flow', function(){
 
+  var blocks = [];
+  var serverOpts = {};
   var jadeOpts = {
     pretty: true
   };
@@ -24,7 +28,7 @@ describe('Block Flow', function(){
   var sassTmpl = path.join( tmplDir, 'sass', 'app.scss' );
 
   it('flows blocks like a boss', function(done){
-    var blocks = [];
+
     var root = 'test/src';
     docflow
       // start at the configured source root
@@ -60,7 +64,22 @@ describe('Block Flow', function(){
 
           ( clean ).should.not.throw();
 
+          serverOpts.blocks = apiEntries;
+          server.run( serverOpts );
+
           done();
         });
   });
+
+  it('serves API', function(done){
+    var url = 'http://localhost:9000/blockflow';
+    request( {url: url}, function( err, res, body ){
+      should.not.exist( err );
+      var apiBlocks = JSON.parse( body );
+      apiBlocks.should.eql( blocks );
+      server.__testHook.selfDestruct( 10 );
+      done();
+    });
+  });
+
 });

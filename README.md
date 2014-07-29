@@ -1,6 +1,6 @@
 # Block Flow
 
-Yet another documentation generator. This one, however, uses custom annotations to place emphasis on event-driven/streaming APIs.
+Yet another documentation generator. This one, however, uses custom annotations to place emphasis on event-driven/streaming APIs. It also exposes your API data as an API. That's so meta.
 
 ## Install
 blockflow is available as a command line tool or as a module which you can leverage from within your own code base.
