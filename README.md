@@ -46,7 +46,7 @@ socket.emit('foo', { foo: 'bar' } );
 blockflow -s path/to/src
 ```
 
-The above generates the documentation in the default directory. The docs generated are very wireframey and should probably be styled according to your liking. To learn more about available options just type the command itself
+The above generates the documentation in the default directory. The docs generated are very wireframey and should probably be styled according to your liking. To learn more about available options read below or just type the command itself with no options
 
 ```
 blockflow
@@ -82,11 +82,28 @@ blockflow
 ## API Mode
 An API for your API
 ```
-blockflow -s /foo/src -a -p 8080 -e /docs
+blockflow -s /path/to/src -a -p 8080 -e /docs
 ```
 
 The above command will parse your docs, create a JSON object and expose it via a RESTful endpoint at
 http://localhost:8080/docs
 
 Still very alpha-ish at the moment. More docs and features coming soon.
+
+## Options
+
+| Option   | Flag   | Required | Default          | Desciption|
+| -------- |:------:| :--------:|:----------------:|:----------
+| Source   | -s 	 | Yes      | N/A              | The root of your source tree |
+| out      | -o 	 | No       | ./blockflow_docs | Web output directory. |
+| API Mode | -a 	 | No       | fasle            | Expose raw block data at a RESTful endpoint |
+| Endpoint | -e 	 | No       | /blockflow       | The endpoint at which to expose raw block data |
+| Port     | -p 	 | No       | 9000             | Port for the API mode server |
+| Verbose  | -v 	 | No       | false            | Use verbose logging |
+
+
+
+
+
+
 
