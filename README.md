@@ -1,6 +1,6 @@
 # Rundown
 
-Yet another documentation generator. This one, however, uses custom annotations to place emphasis on event documenting driven/streaming APIs.
+Yet another documentation generator. This one, however, uses custom annotations to place emphasis on event-driven/streaming APIs.
 
 ```
 /**
