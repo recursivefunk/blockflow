@@ -42,7 +42,7 @@ function run() {
           }
         }))
 
-        .pipe(es.map(function(data, callback){
+        .pipe(es.map(function( data, callback ){
           var obj = parser.parseBlock( data );
 
           if ( !parser.emptyBlock( obj ) ) {
@@ -59,7 +59,7 @@ function run() {
 
   find( _srcRoot )
 
-    .on('file', function(file){
+    .on('file', function( file ){
       var filePath = path.resolve( file );
       toProcess.push( file );
     })
