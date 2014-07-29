@@ -2,7 +2,7 @@
 
 Yet another documentation generator. This one, however, uses custom annotations to place emphasis on event-driven/streaming APIs.
 
-```
+```javascript
 /**
  * @listener aSocketEventListener
  * @on data
@@ -16,7 +16,7 @@ socket.on('data', function(foo, bar){
 
 ```
 
-```
+```javascript
 /**
  * @emitter someSocketEmitter
  * @snippet
