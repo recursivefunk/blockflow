@@ -10,7 +10,7 @@ Yet another documentation generator. This one, however, uses custom annotations 
  * @callbackArg foo
  * @callbackArg bar
  */
-socket.on('data', function(foo, bar){
+socket.on('foo', function(foo){
 
 });
 
