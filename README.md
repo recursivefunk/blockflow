@@ -1,10 +1,10 @@
-# Liq
+# Block Flow
 
 Yet another documentation generator. This one, however, uses custom annotations to place emphasis on event-driven/streaming APIs.
 
 ## Install
 ```
-[sudo] npm install -g liquidity
+[sudo] npm install -g blockflow
 ```
 
 
@@ -36,14 +36,14 @@ socket.emit('foo', { foo: 'bar' } );
 
 ## Usage
 ```
-liq -s path/to/src
+blockflow -s path/to/src
 ```
 
 The above generates the documentation in the default directory. To learn more about available options just type the command itself
 
 ```
-liq
+blockflow
 ```
 
-More docs and features coming soon.
+Still very alpha-ish at the moment. More docs and features coming soon.
 
