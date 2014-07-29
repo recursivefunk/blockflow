@@ -46,7 +46,7 @@ socket.emit('foo', { foo: 'bar' } );
 blockflow -s path/to/src
 ```
 
-The above generates the documentation in the default directory. To learn more about available options just type the command itself
+The above generates the documentation in the default directory. The docs generated are very wireframey and should probably be styled according to your liking. To learn more about available options just type the command itself
 
 ```
 blockflow
@@ -78,6 +78,15 @@ blockflow
 
     })
 ```
+
+## API Mode
+An API for your API
+```
+blockflow -s /foo/src -a -p 8080 -e /docs
+```
+
+The above command will parse your docs, create a JSON object and expose it via a RESTful endpoint at
+http://localhost:8080/docs
 
 Still very alpha-ish at the moment. More docs and features coming soon.
 
