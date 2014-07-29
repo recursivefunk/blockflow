@@ -73,7 +73,7 @@ describe('Block Flow', function(){
 
   it('serves API', function(done){
     var url = 'http://localhost:9000/blockflow';
-    request( {url: url}, function( err, res, body ){
+    request({ url: url }, function( err, res, body ){
       should.not.exist( err );
       var apiBlocks = JSON.parse( body );
       apiBlocks.should.eql( blocks );
