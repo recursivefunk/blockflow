@@ -1,10 +1,10 @@
-# Rundown
+# Liq
 
 Yet another documentation generator. This one, however, uses custom annotations to place emphasis on event-driven/streaming APIs.
 
 ## Install
 ```
-[sudo] npm install -g rundown
+[sudo] npm install -g liquidity
 ```
 
 
@@ -36,13 +36,13 @@ socket.emit('foo', { foo: 'bar' } );
 
 ## Usage
 ```
-rundown -s path/to/src
+liq -s path/to/src
 ```
 
 The above generates the documentation in the default directory. To learn more about available options just type the command itself
 
 ```
-rundown
+liq
 ```
 
 More docs and features coming soon.

@@ -20,7 +20,7 @@ var _srcRoot =  null;
 var _srcOpts = {};
 var blockEmitter = new EventEmitter();
 
-function run( srcOpts ) {
+function flow( srcOpts ) {
 
   _srcOpts = srcOpts || _srcOpts;
   var blocks = [];
@@ -79,7 +79,7 @@ function run( srcOpts ) {
   return blockEmitter;
 }
 
-exports.run = run;
+exports.flow = flow;
 
 exports.from = function( srcRoot ) {
   _srcRoot = srcRoot;

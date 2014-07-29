@@ -9,9 +9,9 @@ var fs = require( 'fs-extra' );
 var jade = require( 'jade' );
 var sass = require( 'node-sass' );
 
-var blockEmitter = require( '../index' );
+var docflow = require( '../index' );
 
-describe('Rundown', function(){
+describe('Block Flow', function(){
 
   var jadeOpts = {
     pretty: true
@@ -23,14 +23,14 @@ describe('Rundown', function(){
   var jadeTmpl = path.join( tmplDir, 'index.jade' );
   var sassTmpl = path.join( tmplDir, 'sass', 'app.scss' );
 
-  it('works', function(done){
+  it('flows blocks like a boss', function(done){
     var blocks = [];
     var root = 'test/src';
-    blockEmitter
+    docflow
       // start at the configured source root
       .from( root )
       // begin parsing docs
-      .run()
+      .flow()
         // listen for individual blocks as soon as they're
         // available
         .on('block', function( block ){
@@ -54,7 +54,7 @@ describe('Rundown', function(){
           var clean = function() {
             fs.statSync( htmlOut );
             fs.statSync( cssOut );
-            // fs.removeSync( outDir );
+            fs.removeSync( outDir );
           };
 
           ( clean ).should.not.throw();
