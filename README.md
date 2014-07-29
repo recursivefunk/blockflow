@@ -55,13 +55,16 @@ blockflow
 ## Module Usage
 ```javascript
 var blockflow = require( 'blockflow' );
+var opts = {
+  verbose: true
+};
 
 blockflow
 
   .from( '/path/to/src' )
 
   // returns an event emitter
-  .flow()
+  .flow( opts )
 
     // fired everytime a block is parsed and available...a "flow" of blocks :)
     .on('block', function( block ){

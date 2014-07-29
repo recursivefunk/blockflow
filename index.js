@@ -14,7 +14,7 @@ var async = require( 'async' );
 var log = require( 'luvely' );
 
 // my stuff
-var parser = require( './lib/parser' )();
+var parserFactory = require( './lib/parserFactory' );
 var blockRegex = new RegExp( /\/\*([\s\S]*?)\*\//g );
 var _srcRoot =  null;
 var _srcOpts = {};
@@ -23,6 +23,7 @@ var blockEmitter = new EventEmitter();
 function flow( srcOpts ) {
 
   _srcOpts = srcOpts || _srcOpts;
+  var parser = parserFactory( _srcOpts );
   var blocks = [];
   var toProcess = [];
 
@@ -46,7 +47,7 @@ function flow( srcOpts ) {
         }))
 
         .pipe(es.map(function( data, callback ){
-          var obj = parser.parseBlock( data, _srcOpts );
+          var obj = parser.parseBlock( data );
 
           if ( !parser.emptyBlock( obj ) ) {
             obj.filename = filename;
