@@ -26,6 +26,7 @@ if ( !args.h ) {
     var jadeOpts = {
       pretty: true
     };
+
     var tmplDir = path.join( __dirname, 'template' );
     var htmlOut = path.join( outDir, 'index.html' );
     var cssOut = path.join( outDir, 'css', 'app.css' );
@@ -33,6 +34,7 @@ if ( !args.h ) {
     var sassTmpl = path.join( tmplDir, 'sass', 'app.scss' );
 
     var onEnd = function( srcRoot, blocks ) {
+
       log.info( 'Successfully parsed ' + blocks.length + ' apiBlocks under ' + srcRoot );
 
       if ( !args.a ) {
