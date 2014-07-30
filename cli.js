@@ -26,7 +26,7 @@ if ( !args.h ) {
     var jadeOpts = {
       pretty: true
     };
-    var tmplDir = './template';
+    var tmplDir = path.join( __dirname, 'template' );
     var htmlOut = path.join( outDir, 'index.html' );
     var cssOut = path.join( outDir, 'css', 'app.css' );
     var jadeTmpl = path.join( tmplDir, 'index.jade' );
