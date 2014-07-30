@@ -32,37 +32,39 @@ if ( !args.h ) {
     var jadeTmpl = path.join( tmplDir, 'index.jade' );
     var sassTmpl = path.join( tmplDir, 'sass', 'app.scss' );
 
+    var onEnd = function( srcRoot, blocks ) {
+      log.info( 'Successfully parsed ' + blocks.length + ' apiBlocks under ' + srcRoot );
+
+      if ( !args.a ) {
+        jadeOpts.items = blocks;
+        var html = jade.renderFile( jadeTmpl, jadeOpts );
+        var css = sass.renderSync({
+          file: sassTmpl
+        });
+
+        fs.mkdirsSync( path.join( outDir, 'css' ) );
+        fs.createWriteStream( htmlOut ).write( html );
+        fs.createWriteStream( cssOut ).write( css );
+      } else {
+        var serverOpts = {
+          blocks: blocks,
+          endpoint: args.e,
+          port: args.p,
+          verbose: args.v
+        };
+        server.run( serverOpts );
+      }
+    };
+
     docflow
 
       .from( srcDir )
 
       .flow( parseOpts )
 
-      .on('end', function(srcRoot, blocks){
+      .on( 'end', onEnd );
 
-        log.info( 'Successfully parsed ' + blocks.length + ' apiBlocks under ' + srcRoot );
 
-        if ( !args.a ) {
-          jadeOpts.items = blocks;
-          var html = jade.renderFile( jadeTmpl, jadeOpts );
-          var css = sass.renderSync({
-            file: sassTmpl
-          });
-
-          fs.mkdirsSync( path.join( outDir, 'css' ) );
-          fs.createWriteStream( htmlOut ).write( html );
-          fs.createWriteStream( cssOut ).write( css );
-        } else {
-          var serverOpts = {
-            blocks: blocks,
-            endpoint: args.e,
-            port: args.p,
-            verbose: args.v
-          };
-          server.run( serverOpts );
-        }
-
-      });
   } else {
     utils.printHelp();
   }

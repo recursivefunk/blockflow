@@ -31,6 +31,34 @@ describe('Block Flow', function(){
 
     var root = 'test/src';
 
+    var onEnd = function( srcRoot, apiEntries ) {
+      blocks.length.should.equal( apiEntries.length );
+      jadeOpts.items = apiEntries;
+      var html = jade.renderFile( jadeTmpl, jadeOpts );
+      var css = sass.renderSync({
+        file: sassTmpl
+      });
+
+      srcRoot.should.equal( root );
+
+      fs.mkdirsSync( path.join( outDir, 'css' ) );
+      fs.createWriteStream( htmlOut ).write( html );
+      fs.createWriteStream( cssOut ).write( css );
+
+      var clean = function() {
+        fs.statSync( htmlOut );
+        fs.statSync( cssOut );
+        fs.removeSync( outDir );
+      };
+
+      ( clean ).should.not.throw();
+
+      serverOpts.blocks = apiEntries;
+      server.run( serverOpts );
+
+      done();
+    };
+
     docflow
       // start at the configured source root
       .from( root )
@@ -43,33 +71,7 @@ describe('Block Flow', function(){
         })
         // receive all blocks once everything has finished
         // processing
-        .on('end', function(srcRoot, apiEntries){
-          blocks.length.should.equal( apiEntries.length );
-          jadeOpts.items = apiEntries;
-          var html = jade.renderFile( jadeTmpl, jadeOpts );
-          var css = sass.renderSync({
-            file: sassTmpl
-          });
-
-          srcRoot.should.equal( root );
-
-          fs.mkdirsSync( path.join( outDir, 'css' ) );
-          fs.createWriteStream( htmlOut ).write( html );
-          fs.createWriteStream( cssOut ).write( css );
-
-          var clean = function() {
-            fs.statSync( htmlOut );
-            fs.statSync( cssOut );
-            fs.removeSync( outDir );
-          };
-
-          ( clean ).should.not.throw();
-
-          serverOpts.blocks = apiEntries;
-          server.run( serverOpts );
-
-          done();
-        });
+        .on( 'end', onEnd );
   });
 
   it('serves API', function(done){
