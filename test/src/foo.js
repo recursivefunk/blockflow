@@ -1,7 +1,7 @@
 
 /**
  * @listener aSocketEventListener
- * @on data
+ * @topic data
  * @description get's called when client sends data
  * @callbackArg foo
  * @callbackArg bar
@@ -12,6 +12,7 @@ socket.on('data', function(){
 
 /**
  * @emitter someSocketEmitter
+ * @topic foo
  * @snippet
  * {
  *   "foo": "bar"
