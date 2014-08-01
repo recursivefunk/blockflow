@@ -51,7 +51,7 @@ describe('Block Flow', function(){
         fs.removeSync( outDir );
       };
 
-      // ( clean ).should.not.throw();
+      ( clean ).should.not.throw();
 
       serverOpts.blocks = apiEntries;
       server.run( serverOpts );
