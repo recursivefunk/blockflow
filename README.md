@@ -46,9 +46,11 @@ socket.broadcast('something', { some: 'data' } );
 blockflow -s path/to/src
 ```
 
-The above generates the documentation in the default directory. The docs generated are very wireframey and should probably be styled according to your liking. To learn more about available options read below or just type the command itself with no options
+The above generates the documentation in the default directory. The docs generated are very wireframey and should probably be styled according to your liking.
 
 ![Alt text](blockflow-web.png)
+
+To learn more about available options read below or just type the command itself with no options
 
 ```
 blockflow
