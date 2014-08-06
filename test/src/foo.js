@@ -6,7 +6,7 @@
  * @callbackArg foo
  * @callbackArg bar
  */
-socket.on('data', function(){
+socket.on('data', function(foo, bar){
 
 });
 
