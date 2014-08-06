@@ -18,12 +18,11 @@ npm install blockflow --save
 ```javascript
 /**
  * @listener aSocketEventListener
- * @topic data
+ * @topic foo
  * @description get's called when client sends data
- * @callbackArg foo
- * @callbackArg bar
+ * @callbackArg fooObj
  */
-socket.on('data', function(){
+socket.on('foo', function(fooObj){
 
 });
 
