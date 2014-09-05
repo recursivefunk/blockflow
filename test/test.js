@@ -32,6 +32,7 @@ describe('Block Flow', function(){
     var root = 'test/src';
 
     var onEnd = function( srcRoot, apiEntries ) {
+      console.log( apiEntries )
       blocks.length.should.equal( apiEntries.length );
       jadeOpts.items = apiEntries;
       var html = jade.renderFile( jadeTmpl, jadeOpts );

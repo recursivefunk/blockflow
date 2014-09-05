@@ -15,7 +15,11 @@ var log = require( 'luvely' );
 
 // my stuff
 var parserFactory = require( './lib/parserFactory' );
-var blockRegex = new RegExp( /\/\*([\s\S]*?)\*\//g );
+var blockRegexes = {
+  js: new RegExp( /\/\*([\s\S]*?)\*\//g ),
+  py: new RegExp( /\"""([\s\S]*?)\"""/g )
+}
+// var blockRegex = new RegExp( /\/\*([\s\S]*?)\*\//g );
 var _srcRoot =  null;
 var _srcOpts = {};
 var blockEmitter = new EventEmitter();
@@ -38,7 +42,8 @@ function flow( srcOpts ) {
         .pipe(es.through(function write(data){
           var self = this;
           var str = data.toString();
-          var blocks = str.match( blockRegex );
+          var blocks = str.match( blockRegexes.py );
+          console.log( blocks )
           if ( blocks && blocks.length ) {
             blocks.forEach(function( block ){
               self.emit( 'data', block );
@@ -64,8 +69,10 @@ function flow( srcOpts ) {
   find( _srcRoot )
 
     .on('file', function( file ){
-      var filePath = path.resolve( file );
-      toProcess.push( file );
+      // var filePath = path.resolve( file );
+      if ( canParse( file ) ) {
+        toProcess.push( file );
+      }
     })
 
     .on('end', function(){
@@ -85,6 +92,10 @@ exports.flow = flow;
 exports.from = function( srcRoot ) {
   _srcRoot = srcRoot;
   return exports;
+};
+
+function canParse( filename ) {
+  return ( /\.js$|\.py$/ ).test( filename );
 };
 
 
