@@ -11,7 +11,7 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "http://github.com/jrayaustin/docflow.git"
+    "url": "http://github.com/jray/blockflow.git"
   },
   "devDependencies": {
     "grunt": "^0.4.5",
