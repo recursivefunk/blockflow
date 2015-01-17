@@ -19,7 +19,6 @@ var blockRegexes = {
   js: new RegExp( /\/\*([\s\S]*?)\*\//g ),
   py: new RegExp( /\"""([\s\S]*?)\"""/g )
 }
-// var blockRegex = new RegExp( /\/\*([\s\S]*?)\*\//g );
 var _srcRoot =  null;
 var _srcOpts = {};
 var blockEmitter = new EventEmitter();
@@ -69,7 +68,6 @@ function flow( srcOpts ) {
   find( _srcRoot )
 
     .on('file', function( file ){
-      // var filePath = path.resolve( file );
       if ( canParse( file ) ) {
         toProcess.push( file );
       }
